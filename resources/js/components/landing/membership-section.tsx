@@ -8,9 +8,9 @@ const steps = [
         description: 'Isi data diri dan pilih tier di halaman pendaftaran.',
     },
     {
-        title: 'Aktivasi di venue',
+        title: 'Aktivasi',
         description:
-            'Admin menghubungi lewat WhatsApp; selesaikan pembayaran di Rumah Kelinci.',
+            'Admin menghubungi lewat WhatsApp; pembayaran dan aktivasi di Rumah Kelinci.',
     },
     {
         title: 'Terima kartu',
