@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { membership } from '@/data/membership';
+import { memberCardUrl, membership } from '@/data/membership';
 import { MemberApiError, registerMember } from '@/lib/member-api';
 import { cn } from '@/lib/utils';
 import type { RegistrationInput, ValidationErrors } from '@/types/member';
@@ -24,7 +24,8 @@ export function MemberRegisterPage() {
     const [errors, setErrors] = useState<ValidationErrors>({});
     const [formError, setFormError] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isRegistered, setIsRegistered] = useState(false);
+    const [cardToken, setCardToken] = useState<string | null>(null);
+    const [isLinkCopied, setIsLinkCopied] = useState(false);
 
     function update<K extends keyof RegistrationInput>(
         key: K,
@@ -40,8 +41,8 @@ export function MemberRegisterPage() {
         setFormError(null);
 
         try {
-            await registerMember(form);
-            setIsRegistered(true);
+            const result = await registerMember(form);
+            setCardToken(result.token);
             window.scrollTo({ top: 0 });
         } catch (error) {
             if (error instanceof MemberApiError) {
@@ -55,7 +56,9 @@ export function MemberRegisterPage() {
         }
     }
 
-    if (isRegistered) {
+    if (cardToken) {
+        const cardUrl = memberCardUrl(cardToken, window.location.origin);
+
         return (
             <SubpageShell title="Pendaftaran diterima">
                 <div className="mx-auto max-w-[720px] px-4 py-20 sm:px-6 lg:py-28">
@@ -68,17 +71,55 @@ export function MemberRegisterPage() {
                         <span className="font-semibold whitespace-nowrap text-line">
                             {form.phone}
                         </span>{' '}
-                        untuk pembayaran dan aktivasi. Kartu member ber-QR
-                        dicetak setelah keanggotaan aktif.
+                        untuk pembayaran dan aktivasi.
                     </p>
+
+                    <div className="mt-10 border-t-2 border-line pt-6">
+                        <h2 className="font-display text-[2rem] leading-none font-extrabold uppercase">
+                            Simpan link kartu Anda
+                        </h2>
+                        <p className="mt-3 leading-relaxed text-line-soft">
+                            Link ini pribadi. Sekarang isinya status
+                            pendaftaran; begitu admin mengaktifkan keanggotaan,
+                            link yang sama menjadi kartu member digital Anda,
+                            sama dengan QR di kartu fisik.
+                        </p>
+                        <p className="mt-5 border-b-2 border-line/70 pb-2 font-medium break-all">
+                            {cardUrl}
+                        </p>
+                        <div className="mt-6 flex flex-wrap gap-3">
+                            <a
+                                href={cardUrl}
+                                className={cn(
+                                    actionClasses.base,
+                                    actionClasses.ball,
+                                    actionClasses.md,
+                                )}
+                            >
+                                Buka kartu saya
+                            </a>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    void navigator.clipboard
+                                        .writeText(cardUrl)
+                                        .then(() => setIsLinkCopied(true));
+                                }}
+                                className={cn(
+                                    actionClasses.base,
+                                    actionClasses.line,
+                                    actionClasses.md,
+                                    'cursor-pointer',
+                                )}
+                            >
+                                {isLinkCopied ? 'Link disalin' : 'Salin link'}
+                            </button>
+                        </div>
+                    </div>
+
                     <a
                         href="/"
-                        className={cn(
-                            actionClasses.base,
-                            actionClasses.line,
-                            actionClasses.md,
-                            'mt-10',
-                        )}
+                        className="mt-12 inline-block text-sm font-semibold text-line-soft underline hover:text-line"
                     >
                         Kembali ke beranda
                     </a>

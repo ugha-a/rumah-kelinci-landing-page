@@ -1,6 +1,6 @@
 -- Member Rumah Kelinci Padel.
 -- token: kode acak di QR kartu (/m/<token>); bisa diganti kalau kartu hilang.
-CREATE TABLE members (
+CREATE TABLE IF NOT EXISTS members (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     token TEXT NOT NULL UNIQUE,
     status TEXT NOT NULL DEFAULT 'pending'
@@ -19,4 +19,4 @@ CREATE TABLE members (
     updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
-CREATE INDEX members_status_index ON members (status);
+CREATE INDEX IF NOT EXISTS members_status_index ON members (status);

@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 import { findTier, memberCardUrl, membership } from '@/data/membership';
 import { venue } from '@/data/venue';
-import { MemberApiError, fetchMemberProfile } from '@/lib/member-api';
+import { MemberApiError, fetchMemberCard } from '@/lib/member-api';
 import { cn } from '@/lib/utils';
-import type { MemberProfile } from '@/types/member';
+import type {
+    MemberCardResponse,
+    MemberProfile,
+    MemberRegistrationStatus,
+} from '@/types/member';
 import { ActionLink } from '../landing/action-link';
 import { MemberCard } from './member-card';
 import { SubpageShell } from './subpage-shell';
 
 type ProfileState =
     | { kind: 'loading' }
-    | { kind: 'ready'; profile: MemberProfile }
+    | { kind: 'ready'; card: MemberCardResponse }
     | { kind: 'error'; status: number; message: string };
 
 export function formatLongDate(isoDate: string | null): string {
@@ -69,6 +73,91 @@ function ProfileError({
             >
                 Ke beranda
             </ActionLink>
+        </div>
+    );
+}
+
+/** The personal link before activation (pending) or after a declined registration. */
+function RegistrationStatus({
+    registration,
+}: {
+    registration: MemberRegistrationStatus;
+}) {
+    const tier = findTier(registration.tierId);
+    const isPending = registration.status === 'pending';
+
+    return (
+        <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
+            <div>
+                <MemberCard
+                    fullName={registration.fullName}
+                    memberNumber={
+                        isPending ? 'Menunggu aktivasi' : 'Tidak disetujui'
+                    }
+                    tierName={tier?.name ?? registration.tierId}
+                    className="max-w-[520px] opacity-70"
+                />
+            </div>
+            <div>
+                <h1 className="font-display text-[clamp(2.6rem,6vw,4rem)] leading-[0.9] font-black text-balance uppercase">
+                    {isPending
+                        ? 'Menunggu aktivasi'
+                        : 'Pendaftaran tidak disetujui'}
+                </h1>
+                <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-line-soft">
+                    {isPending
+                        ? `Pendaftaran ${tier?.name ?? ''} atas nama ${registration.fullName} diterima ${formatLongDate(registration.registeredAt)}. Admin akan menghubungi lewat WhatsApp untuk pembayaran dan aktivasi. Setelah aktif, halaman ini otomatis menjadi kartu member digital Anda.`
+                        : 'Pendaftaran ini tidak disetujui admin. Hubungi Rumah Kelinci untuk informasi lebih lanjut.'}
+                </p>
+                {isPending && (
+                    <ol className="mt-8 border-t-2 border-line">
+                        {[
+                            { label: 'Pendaftaran diterima', isDone: true },
+                            {
+                                label: 'Pembayaran & aktivasi di venue',
+                                isDone: false,
+                            },
+                            { label: 'Kartu member aktif', isDone: false },
+                        ].map((step) => (
+                            <li
+                                key={step.label}
+                                className="flex items-center gap-3 border-b border-line/20 py-3.5"
+                            >
+                                <span
+                                    aria-hidden="true"
+                                    className={cn(
+                                        'size-3 shrink-0 rounded-full',
+                                        step.isDone
+                                            ? 'bg-line'
+                                            : 'ring-2 ring-line/50',
+                                    )}
+                                />
+                                <span
+                                    className={cn(
+                                        'font-semibold',
+                                        !step.isDone && 'text-line-soft',
+                                    )}
+                                >
+                                    {step.label}
+                                    <span className="sr-only">
+                                        {step.isDone
+                                            ? ' (selesai)'
+                                            : ' (belum)'}
+                                    </span>
+                                </span>
+                            </li>
+                        ))}
+                    </ol>
+                )}
+                <ActionLink
+                    href="/"
+                    variant="line"
+                    external={false}
+                    className="mt-10"
+                >
+                    Ke beranda
+                </ActionLink>
+            </div>
         </div>
     );
 }
@@ -198,10 +287,10 @@ export function MemberProfilePage({ token }: { token: string }) {
     useEffect(() => {
         let isCurrent = true;
 
-        fetchMemberProfile(token)
-            .then((profile) => {
+        fetchMemberCard(token)
+            .then((card) => {
                 if (isCurrent) {
-                    setState({ kind: 'ready', profile });
+                    setState({ kind: 'ready', card });
                 }
             })
             .catch((error: unknown) => {
@@ -223,8 +312,7 @@ export function MemberProfilePage({ token }: { token: string }) {
         };
     }, [token]);
 
-    const title =
-        state.kind === 'ready' ? state.profile.fullName : 'Kartu member';
+    const title = state.kind === 'ready' ? state.card.fullName : 'Kartu member';
 
     return (
         <SubpageShell title={title} noIndex>
@@ -236,9 +324,12 @@ export function MemberProfilePage({ token }: { token: string }) {
                         message={state.message}
                     />
                 )}
-                {state.kind === 'ready' && (
-                    <ProfileDetails profile={state.profile} token={token} />
-                )}
+                {state.kind === 'ready' &&
+                    (state.card.status === 'active' ? (
+                        <ProfileDetails profile={state.card} token={token} />
+                    ) : (
+                        <RegistrationStatus registration={state.card} />
+                    ))}
             </div>
         </SubpageShell>
     );

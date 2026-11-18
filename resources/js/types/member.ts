@@ -1,7 +1,8 @@
 export type MemberStatus = 'pending' | 'active' | 'inactive' | 'rejected';
 
-/** What a scanned card shows (`GET /api/members/:token`). */
+/** What a scanned card shows (`GET /api/members/:token`) once active. */
 export type MemberProfile = {
+    status: 'active';
     memberNumber: string;
     fullName: string;
     phone: string;
@@ -12,6 +13,22 @@ export type MemberProfile = {
     validUntil: string;
     memberSince: string;
     isExpired: boolean;
+};
+
+/** The same personal link before activation, or after a declined registration. */
+export type MemberRegistrationStatus = {
+    status: 'pending' | 'rejected';
+    fullName: string;
+    tierId: string;
+    registeredAt: string;
+};
+
+export type MemberCardResponse = MemberProfile | MemberRegistrationStatus;
+
+/** `POST /api/registrations` answer: the personal card link token. */
+export type RegistrationResult = {
+    message: string;
+    token: string;
 };
 
 /** A member row as the admin sees it. */

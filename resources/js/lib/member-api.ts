@@ -1,10 +1,11 @@
 import type {
     AdminMember,
     ApiError,
+    MemberCardResponse,
     MemberIdentityInput,
-    MemberProfile,
     MemberStatus,
     RegistrationInput,
+    RegistrationResult,
     ValidationErrors,
 } from '@/types/member';
 
@@ -54,14 +55,16 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
     return body as T;
 }
 
-export function registerMember(input: RegistrationInput): Promise<ApiError> {
+export function registerMember(
+    input: RegistrationInput,
+): Promise<RegistrationResult> {
     return request('/api/registrations', {
         method: 'POST',
         body: JSON.stringify(input),
     });
 }
 
-export function fetchMemberProfile(token: string): Promise<MemberProfile> {
+export function fetchMemberCard(token: string): Promise<MemberCardResponse> {
     return request(`/api/members/${encodeURIComponent(token)}`);
 }
 

@@ -3,6 +3,7 @@ import type {
     AdminMember,
     MemberIdentityInput,
     MemberProfile,
+    MemberRegistrationStatus,
     MemberStatus,
     ValidationErrors,
 } from '../resources/js/types/member';
@@ -239,7 +240,10 @@ async function register(request: Request, env: Env): Promise<Response> {
     const body = await readJson(request);
 
     if (text(body, 'website')) {
-        return json({ message: 'Pendaftaran diterima.' }, 201);
+        return json(
+            { message: 'Pendaftaran diterima.', token: createToken() },
+            201,
+        );
     }
 
     const errors: ValidationErrors = {};
@@ -252,12 +256,14 @@ async function register(request: Request, env: Env): Promise<Response> {
 
     throwIfInvalid(errors);
 
+    const token = createToken();
+
     await env.DB.prepare(
         `INSERT INTO members (token, full_name, phone, email, birth_date, city, requested_tier)
          VALUES (?, ?, ?, ?, ?, ?, ?)`,
     )
         .bind(
-            createToken(),
+            token,
             identity.fullName,
             identity.phone,
             identity.email || null,
@@ -267,7 +273,7 @@ async function register(request: Request, env: Env): Promise<Response> {
         )
         .run();
 
-    return json({ message: 'Pendaftaran diterima.' }, 201);
+    return json({ message: 'Pendaftaran diterima.', token }, 201);
 }
 
 async function memberProfile(token: string, env: Env): Promise<Response> {
@@ -275,8 +281,19 @@ async function memberProfile(token: string, env: Env): Promise<Response> {
         .bind(token)
         .first<MemberRow>();
 
-    if (!row || row.status === 'pending' || row.status === 'rejected') {
+    if (!row) {
         throw new HttpError(404, 'Kartu tidak dikenali.');
+    }
+
+    if (row.status === 'pending' || row.status === 'rejected') {
+        const registration: MemberRegistrationStatus = {
+            status: row.status,
+            fullName: row.full_name,
+            tierId: row.requested_tier,
+            registeredAt: makassarDate(row.created_at),
+        };
+
+        return json(registration);
     }
 
     if (row.status === 'inactive') {
@@ -284,6 +301,7 @@ async function memberProfile(token: string, env: Env): Promise<Response> {
     }
 
     const profile: MemberProfile = {
+        status: 'active',
         memberNumber: row.member_number ?? formatMemberNumber(row.id),
         fullName: row.full_name,
         phone: row.phone,

@@ -4,6 +4,7 @@ import { findTier, memberCardUrl, membership } from '@/data/membership';
 import { venue } from '@/data/venue';
 import { MemberApiError, adminApi } from '@/lib/member-api';
 import { cn } from '@/lib/utils';
+import { memberCardMessage, whatsappChatUrl } from '@/lib/whatsapp';
 import type {
     AdminMember,
     MemberIdentityInput,
@@ -11,7 +12,7 @@ import type {
     ValidationErrors,
 } from '@/types/member';
 import { actionClasses } from '../landing/action-link';
-import { BallMark, ChevronDownIcon } from '../landing/icons';
+import { BallMark, ChatIcon, ChevronDownIcon } from '../landing/icons';
 import { FormField, fieldInputClasses, fieldLabelClasses } from './form-field';
 import { MemberCard } from './member-card';
 import { formatLongDate } from './member-profile-page';
@@ -57,6 +58,16 @@ function identityOf(member: AdminMember): MemberIdentityInput {
         birthDate: member.birthDate ?? '',
         city: member.city ?? '',
     };
+}
+
+function sendCardUrl(member: AdminMember): string {
+    return whatsappChatUrl(
+        member.phone,
+        memberCardMessage(
+            member,
+            memberCardUrl(member.token, window.location.origin),
+        ),
+    );
 }
 
 function errorMessage(error: unknown): string {
@@ -401,9 +412,18 @@ function MemberPanel({
                     />
                     <div className="space-y-4">
                         <div className="flex flex-wrap gap-2">
+                            <a
+                                href={sendCardUrl(member)}
+                                target="_blank"
+                                rel="noopener"
+                                className={buttonBall}
+                            >
+                                <ChatIcon className="size-4" />
+                                Kirim kartu via WhatsApp
+                            </a>
                             <button
                                 type="button"
-                                className={buttonBall}
+                                className={buttonLine}
                                 onClick={() => onPrint(member)}
                             >
                                 Cetak kartu
@@ -611,7 +631,10 @@ export function AdminPage() {
     const [openId, setOpenId] = useState<number | null>(null);
     const [isAdding, setIsAdding] = useState(false);
     const [printMember, setPrintMember] = useState<AdminMember | null>(null);
-    const [flash, setFlash] = useState<string | null>(null);
+    const [flash, setFlash] = useState<{
+        text: string;
+        member?: AdminMember;
+    } | null>(null);
 
     const load = useCallback(async (nextStatus: MemberStatus) => {
         setIsLoading(true);
@@ -659,7 +682,16 @@ export function AdminPage() {
         );
         setOpenId(null);
         const label = tabs.find((tab) => tab.status === updated.status)?.label;
-        setFlash(`${updated.fullName} dipindahkan ke tab “${label}”.`);
+        setFlash(
+            updated.status === 'active'
+                ? {
+                      text: `${updated.fullName} aktif sebagai ${updated.memberNumber}. Kirim link kartunya ke member:`,
+                      member: updated,
+                  }
+                : {
+                      text: `${updated.fullName} dipindahkan ke tab “${label}”.`,
+                  },
+        );
     }
 
     return (
@@ -702,9 +734,10 @@ export function AdminPage() {
                                 onCancel={() => setIsAdding(false)}
                                 onCreated={(member) => {
                                     setIsAdding(false);
-                                    setFlash(
-                                        `${member.fullName} aktif sebagai ${member.memberNumber}.`,
-                                    );
+                                    setFlash({
+                                        text: `${member.fullName} aktif sebagai ${member.memberNumber}. Kirim link kartunya ke member:`,
+                                        member,
+                                    });
                                     setStatus('active');
                                     setOpenId(member.id);
                                     void load('active');
@@ -742,9 +775,23 @@ export function AdminPage() {
                     </div>
 
                     {flash && (
-                        <p role="status" className="mt-5 text-sm text-line">
-                            {flash}
-                        </p>
+                        <div
+                            role="status"
+                            className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm text-line"
+                        >
+                            <p>{flash.text}</p>
+                            {flash.member && (
+                                <a
+                                    href={sendCardUrl(flash.member)}
+                                    target="_blank"
+                                    rel="noopener"
+                                    className={buttonBall}
+                                >
+                                    <ChatIcon className="size-4" />
+                                    Kirim kartu via WhatsApp
+                                </a>
+                            )}
+                        </div>
                     )}
 
                     <div role="tabpanel" className="mt-4">
