@@ -1,0 +1,4 @@
+/* Static build styles: the app's own stylesheet, scanned from the shared components. */
+@import '../resources/css/app.css';
+
+@source '../resources/js';

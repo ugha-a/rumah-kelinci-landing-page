@@ -2,107 +2,107 @@
 name: Rumah Kelinci Padel
 description: A padel club and cafe in central Makassar, laid out on the court's own plan.
 colors:
-  court: "#1c4fa8"
-  court-deep: "#173f88"
-  surround: "#0b1b33"
-  surround-raised: "#11264a"
-  line: "#f7f9fc"
-  line-soft: "#c9d6ee"
-  ball: "#ddeb3b"
-  ink: "#0b1b33"
+    court: '#1c4fa8'
+    court-deep: '#173f88'
+    surround: '#0b1b33'
+    surround-raised: '#11264a'
+    line: '#f7f9fc'
+    line-soft: '#c9d6ee'
+    ball: '#ddeb3b'
+    ink: '#0b1b33'
 typography:
-  display:
-    fontFamily: "Big Shoulders Display, Arial Narrow, ui-sans-serif, sans-serif"
-    fontSize: "clamp(3.5rem, 6.6cqw, 6rem)"
-    fontWeight: 900
-    lineHeight: 0.86
-    letterSpacing: "-0.01em"
-  headline:
-    fontFamily: "Big Shoulders Display, Arial Narrow, ui-sans-serif, sans-serif"
-    fontSize: "clamp(2.6rem, 5vw, 4.2rem)"
-    fontWeight: 900
-    lineHeight: 0.9
-  figure:
-    fontFamily: "Big Shoulders Display, Arial Narrow, ui-sans-serif, sans-serif"
-    fontSize: "clamp(2.4rem, 4.4cqw, 4rem)"
-    fontWeight: 800
-    lineHeight: 0.95
-    fontFeature: "\"tnum\" 1"
-  title:
-    fontFamily: "Big Shoulders Display, Arial Narrow, ui-sans-serif, sans-serif"
-    fontSize: "2rem"
-    fontWeight: 800
-    lineHeight: 1
-  lead:
-    fontFamily: "Archivo, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(1.1rem, 1.65cqw, 1.45rem)"
-    fontWeight: 500
-    lineHeight: 1.375
-  body:
-    fontFamily: "Archivo, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "1.125rem"
-    fontWeight: 400
-    lineHeight: 1.625
-  label:
-    fontFamily: "Archivo, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.7rem"
-    fontWeight: 600
-    lineHeight: 1.5
-    letterSpacing: "0.12em"
+    display:
+        fontFamily: 'Big Shoulders Display, Arial Narrow, ui-sans-serif, sans-serif'
+        fontSize: 'clamp(3.5rem, 6.6cqw, 6rem)'
+        fontWeight: 900
+        lineHeight: 0.86
+        letterSpacing: '-0.01em'
+    headline:
+        fontFamily: 'Big Shoulders Display, Arial Narrow, ui-sans-serif, sans-serif'
+        fontSize: 'clamp(2.6rem, 5vw, 4.2rem)'
+        fontWeight: 900
+        lineHeight: 0.9
+    figure:
+        fontFamily: 'Big Shoulders Display, Arial Narrow, ui-sans-serif, sans-serif'
+        fontSize: 'clamp(2.4rem, 4.4cqw, 4rem)'
+        fontWeight: 800
+        lineHeight: 0.95
+        fontFeature: '"tnum" 1'
+    title:
+        fontFamily: 'Big Shoulders Display, Arial Narrow, ui-sans-serif, sans-serif'
+        fontSize: '2rem'
+        fontWeight: 800
+        lineHeight: 1
+    lead:
+        fontFamily: 'Archivo, ui-sans-serif, system-ui, sans-serif'
+        fontSize: 'clamp(1.1rem, 1.65cqw, 1.45rem)'
+        fontWeight: 500
+        lineHeight: 1.375
+    body:
+        fontFamily: 'Archivo, ui-sans-serif, system-ui, sans-serif'
+        fontSize: '1.125rem'
+        fontWeight: 400
+        lineHeight: 1.625
+    label:
+        fontFamily: 'Archivo, ui-sans-serif, system-ui, sans-serif'
+        fontSize: '0.7rem'
+        fontWeight: 600
+        lineHeight: 1.5
+        letterSpacing: '0.12em'
 rounded:
-  none: "0px"
-  full: "9999px"
+    none: '0px'
+    full: '9999px'
 spacing:
-  gutter-phone: "16px"
-  gutter-tablet: "24px"
-  gutter-desktop: "40px"
-  block: "56px"
-  section: "80px"
-  section-lg: "112px"
+    gutter-phone: '16px'
+    gutter-tablet: '24px'
+    gutter-desktop: '40px'
+    block: '56px'
+    section: '80px'
+    section-lg: '112px'
 components:
-  action-ball:
-    backgroundColor: "{colors.ball}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.full}"
-    padding: "0 20px"
-    height: "44px"
-  action-ball-lg:
-    backgroundColor: "{colors.ball}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.full}"
-    padding: "0 28px"
-    height: "52px"
-  action-ball-hover:
-    backgroundColor: "{colors.line}"
-    textColor: "{colors.ink}"
-  action-line:
-    backgroundColor: "transparent"
-    textColor: "{colors.line}"
-    rounded: "{rounded.full}"
-    padding: "0 20px"
-    height: "44px"
-  action-line-hover:
-    backgroundColor: "{colors.line}"
-    textColor: "{colors.ink}"
-  field-underline:
-    backgroundColor: "transparent"
-    textColor: "{colors.line}"
-    rounded: "{rounded.none}"
-    padding: "0"
-    height: "44px"
-  nav-bar:
-    backgroundColor: "{colors.surround}"
-    textColor: "{colors.line-soft}"
-    height: "64px"
-  court-surface:
-    backgroundColor: "{colors.court}"
-    textColor: "{colors.line}"
-    rounded: "{rounded.none}"
-  photo-slot:
-    backgroundColor: "{colors.surround-raised}"
-    textColor: "{colors.line-soft}"
-    rounded: "{rounded.none}"
-    padding: "20px"
+    action-ball:
+        backgroundColor: '{colors.ball}'
+        textColor: '{colors.ink}'
+        rounded: '{rounded.full}'
+        padding: '0 20px'
+        height: '44px'
+    action-ball-lg:
+        backgroundColor: '{colors.ball}'
+        textColor: '{colors.ink}'
+        rounded: '{rounded.full}'
+        padding: '0 28px'
+        height: '52px'
+    action-ball-hover:
+        backgroundColor: '{colors.line}'
+        textColor: '{colors.ink}'
+    action-line:
+        backgroundColor: 'transparent'
+        textColor: '{colors.line}'
+        rounded: '{rounded.full}'
+        padding: '0 20px'
+        height: '44px'
+    action-line-hover:
+        backgroundColor: '{colors.line}'
+        textColor: '{colors.ink}'
+    field-underline:
+        backgroundColor: 'transparent'
+        textColor: '{colors.line}'
+        rounded: '{rounded.none}'
+        padding: '0'
+        height: '44px'
+    nav-bar:
+        backgroundColor: '{colors.surround}'
+        textColor: '{colors.line-soft}'
+        height: '64px'
+    court-surface:
+        backgroundColor: '{colors.court}'
+        textColor: '{colors.line}'
+        rounded: '{rounded.none}'
+    photo-slot:
+        backgroundColor: '{colors.surround-raised}'
+        textColor: '{colors.line-soft}'
+        rounded: '{rounded.none}'
+        padding: '20px'
 ---
 
 # Design System: Rumah Kelinci Padel
@@ -118,6 +118,7 @@ The voice is sign-painted and athletic: a condensed, very heavy uppercase displa
 Motion is a single sporting gesture: on load the court lines draw themselves in play order, the net drops in, then the ball is served once across the net into the opposite service box and stays there. Nothing loops.
 
 **Key Characteristics:**
+
 - Court blue drench on a navy surround; no light theme (`color-scheme: dark`).
 - White line work at true court proportions; lines, not boxes.
 - Ball yellow is rare and always means "the ball" or "act here".
@@ -130,9 +131,11 @@ Motion is a single sporting gesture: on load the court lines draw themselves in 
 A two-blue world with a white line layer and a single yellow ball.
 
 ### Primary
+
 - **Ball Yellow** (`ball`): the padel ball. Fills every primary action (Booking, Booking di AYO, Cari sesi di Reclub), the served ball and its dashed trail and target ring, and the wordmark's ball mark. Also the interaction state colour: 3px focus outline, text selection, caret, and the underline of a focused form field.
 
 ### Neutral
+
 - **Court Blue** (`court`): the playing surface. The hero court and the drenched "on court" sections (Lapangan, Komunitas).
 - **Deep Court** (`court-deep`): the four small court tiles in the Lapangan section, and the chip that masks the net behind each court number.
 - **Night Surround** (`surround`): the page ground, the nav bar, everything outside the court.
@@ -142,6 +145,7 @@ A two-blue world with a white line layer and a single yellow ball.
 - **Ink** (`ink`): text on ball yellow and on white hover fills. Same value as Night Surround; kept as a separate role.
 
 ### Named Rules
+
 **The Only-The-Ball Rule.** Ball yellow appears only where the ball is: actions, the served ball, the ball mark, and focus/selection/caret/active-field state. Never as a heading colour, a section fill, a decorative accent or a highlight on facts.
 
 **The On-Court / Off-Court Rule.** A section is either on court (court blue fill) or off court (navy surround). There is no third surface colour for sections; raised surround is only for empty media slots.
@@ -156,6 +160,7 @@ Both are self-hosted through the Vite fonts pipeline (Bunny source), exposed as 
 **Character:** A tall, sign-painted condensed face that reads like stencilled court markings and scoreboard numerals, paired with a neutral, slightly wide grotesque that stays quiet and legible on phones.
 
 ### Hierarchy
+
 - **Display** (900, clamp(3.5rem, 6.6cqw, 6rem) on the landscape court, 12.5cqw on the portrait court, line-height 0.86, uppercase): the venue name inside the court only. Sized in container units so it scales with the court, not the viewport.
 - **Headline** (900, clamp(2.6rem, 5vw, 4.2rem), line-height 0.9, uppercase, balanced): one per section, in plain Indonesian ("Papan skor dari pemain", "Semua yang ada di luar garis").
 - **Figure** (800–900, tabular numerals, line-height 0.95–1): prices and scores. Price clamp(2.4rem, 4.4cqw, 4rem); headline score 900 clamp(3rem, 6vw, 4.6rem); sub-scores 800 clamp(2rem, 3.6vw, 2.8rem); court numbers 900 up to 6rem.
@@ -165,6 +170,7 @@ Both are self-hosted through the Vite fonts pipeline (Bunny source), exposed as 
 - **Label** (600, 0.7rem, 0.12em tracking, uppercase): form field labels only. Scoreboard row labels use 600 uppercase at clamp(1rem, 1.6vw, 1.2rem); court captions 600 uppercase with 0.06–0.1em tracking.
 
 ### Named Rules
+
 **The Painted-Numbers Rule.** Every number that matters (price, score, court number) is set in the display face with tabular numerals. Body copy never carries the key figure alone.
 
 **The No-Kicker Rule.** Headings stand alone; no eyebrow labels above them. Uppercase tracked small text is reserved for form labels and captions under objects.
@@ -184,12 +190,14 @@ Below the hero the page runs on a 1200px container (nav 1440px) with side gutter
 Flat. Depth is surface change (navy surround versus court blue) and the weight of painted lines, not shadow. Two shadows exist and both are small, functional exceptions.
 
 ### Shadow Vocabulary
+
 - **Ball lift** (`box-shadow: 0 6px 14px -6px rgb(6 13 26 / 0.6)`): under ball-yellow actions only, so the ball sits on the surface.
 - **Court slab** (`box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.6)`): under the landscape hero court only, to lift the court off the surround.
 
 The sticky nav is Night Surround at 90% with a medium backdrop blur and a 1px Court Line White hairline at 10% below it.
 
 ### Named Rules
+
 **The Painted-Not-Lifted Rule.** Surfaces never float. New elements get structure from a line, not from a shadow.
 
 ## Shapes
@@ -197,6 +205,7 @@ The sticky nav is Night Surround at 90% with a medium backdrop blur and a 1px Co
 Square corners everywhere: court surfaces, photo and map frames, form fields (`rounded-none`). The one round shape is the ball, and actions borrow it: every action is a full pill. Inside the court plan, line ends are square-capped like painted tape; only the serve trail has round caps.
 
 **Line weights** are the world's material:
+
 - **Court lines:** stroke 10 units on a 2000 × 1000 plan (5 cm, the real line width), square caps. Mini court tiles use 16 units so they survive at small sizes.
 - **Net:** 2.4 × the line weight at 85% opacity, overhanging each sideline by 18 units.
 - **Structural rules:** 2px solid Court Line White (scoreboard top and bottom, facility column dividers, Komunitas band, media frames, booking block divider).
@@ -205,12 +214,15 @@ Square corners everywhere: court surfaces, photo and map frames, form fields (`r
 - **Field rule:** a 2px underline at 70% white, turning ball yellow on focus.
 
 ### Named Rules
+
 **The Lines-Not-Boxes Rule.** Content is framed by lines (a top rule, a divider, a court zone), never by a filled, padded, rounded card. A 2px frame is reserved for media (photo, map) where the frame is the court line around a picture.
 
 ## Components
 
 ### Buttons (ActionLink)
+
 Pill-shaped and ball-coloured: actions are the ball on the court.
+
 - **Shape:** full pill (`rounded.full`), semibold Archivo, icon gap 10px, no wrapping.
 - **Ball (primary):** Ball Yellow fill, Ink text, ball lift shadow. Sizes md (44px, 0.95rem) and lg (52px, 1rem); the nav and small zone variants run 40px at 0.875rem.
 - **Line (secondary):** transparent, Court Line White text, 2px inset ring at 80% white. Used for WhatsApp, Instagram, Google Maps and "Cek slot di AYO".
@@ -219,7 +231,9 @@ Pill-shaped and ball-coloured: actions are the ball on the court.
 - **Focus:** global 3px Ball Yellow outline, 3px offset.
 
 ### Inputs / Fields (BookingComposer)
+
 Fields are court lines you write on.
+
 - **Style:** no box, no fill, square; a 2px underline at 70% white; 44px tall; 1rem medium Archivo with tabular numerals. Native date/time pickers have their indicators inverted to white.
 - **Label:** Label style above each field (Tanggal, Jam, Durasi), Faded Line.
 - **Focus:** the underline turns Ball Yellow; no outline ring.
@@ -227,27 +241,34 @@ Fields are court lines you write on.
 - **Pending state:** while no WhatsApp number is configured, the composer is replaced by a short note and a line-variant "Cek slot di AYO" action.
 
 ### Navigation (SiteNav)
+
 - **Style:** slim 64px Night Surround bar above the court, sticky, never painted on the court.
 - **Wordmark:** ball mark + "RUMAH KELINCI" in display 800 at 1.45rem, "PADEL" in Faded Line.
 - **Links:** Archivo 500 at 0.95rem, Faded Line, turning Court Line White with an underline on hover; hidden below 1024px.
 - **Action:** a 40px ball Booking pill, always present at every width.
 
 ### Court Plan (signature)
+
 An SVG plan of the real court, used for the hero and the four mini courts.
+
 - **Geometry:** 2000 × 1000 units (cm). Back walls, sidelines, service lines 305 units from each wall (6.95 m from the net), centre service line overrunning each service line by 20, net across the middle. Portrait is the same plan rotated, not redrawn.
 - **Serve:** a straight cross-court line from the left back zone (lower half) to the opposite service box, crossing the net, drawn as a 3px dashed Ball Yellow trail at 75%; the ball (radius 15) comes to rest inside a 2px target ring at 55%.
 - **Variants:** `animated` (draws on mount, hero), `animateInView` (draws when 15% visible, mini courts), `showServe`, `lineWidth`.
 
 ### Court Zones
+
 Zones are bare grid cells over the plan: no background, no border; the painted lines are their edges. Text inside a zone uses container-unit padding and sizes.
 
 ### Scoreboard
+
 A typographic table, not a widget: 2px rules top and bottom, 1px 25% row dividers, uppercase semibold row labels left, display figures right (overall 4,9 largest, sub-scores two decimals). Source link and check date sit beside it.
 
 ### Media Frames (VenuePhoto, map)
+
 Square, 2px Court Line White frame, 4:3 (5:4 for the cafe on desktop). Empty slots are Raised Surround with an honest caption naming the file the owner should drop in. The map iframe is slightly desaturated (saturate 0.75, contrast 1.05).
 
 ### Motion
+
 - **Line draw:** each court line draws via stroke-dashoffset over 1.1s on the expo-out curve, in play order (outline 0–0.24s, service lines 0.32s, centre line 0.44s, net 0.56s).
 - **Serve once:** at 1.05s the ball travels the serve path over 0.95s (spline 0.3 0.1 0.35 1), its radius swelling to 1.7× at mid-flight to read as the top of the arc; the trail reveals with it; the target ring rises in at 1.95s. Then everything holds still.
 - **In-view draw:** mini courts start hidden-but-pending and draw when 15% visible; if the observer never fires, they draw anyway after 6s so lines are never lost.
@@ -256,6 +277,7 @@ Square, 2px Court Line White frame, 4:3 (5:4 for the cafe on desktop). Empty slo
 ## Do's and Don'ts
 
 ### Do:
+
 - **Do** place hero content into court zones at the court's real proportions (15.25 / 34.75 / 34.75 / 15.25).
 - **Do** use landscape court from 1024px and the portrait court below it, so the whole court is the first screen.
 - **Do** frame and divide with 2px Court Line White rules, 1px hairlines at 10–30%, and 12 × 2px dashes for lists.
@@ -265,6 +287,7 @@ Square, 2px Court Line White frame, 4:3 (5:4 for the cafe on desktop). Empty slo
 - **Do** keep motion to one gesture: lines draw, the ball is served once, then stillness; honour reduced motion with the finished state.
 
 ### Don't:
+
 - **Don't** use rounded, filled or shadowed cards; lines, not boxes.
 - **Don't** round anything except actions (pills) and the ball itself.
 - **Don't** use Ball Yellow for headings, fills, highlights or decoration.

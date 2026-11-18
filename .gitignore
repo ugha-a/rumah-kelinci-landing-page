@@ -43,3 +43,5 @@ yarn-error.log
 /opencode.json
 /opencode.jsonc
 /.github/workflows
+/dist
+/.wrangler
