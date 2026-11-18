@@ -14,6 +14,7 @@
         {
             "binding": "DB",
             "database_name": "rumah-kelinci-members",
+            "database_id": "753bf80e-60e2-474d-875c-b152945030ac",
             "migrations_dir": "migrations",
         },
     ],
