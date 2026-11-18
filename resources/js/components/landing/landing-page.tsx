@@ -4,6 +4,7 @@ import { CourtHero } from './court-hero';
 import { CourtsSection } from './courts-section';
 import { FacilitiesSection } from './facilities-section';
 import { LocationSection } from './location-section';
+import { MembershipSection } from './membership-section';
 import { Scoreboard } from './scoreboard';
 import { SiteFooter } from './site-footer';
 import { SiteNav } from './site-nav';
@@ -29,6 +30,7 @@ export function LandingPage() {
                 <FacilitiesSection />
                 <CafeSection />
                 <CommunitySection />
+                <MembershipSection />
                 <LocationSection />
             </main>
             <SiteFooter />

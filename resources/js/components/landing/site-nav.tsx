@@ -3,10 +3,11 @@ import { ActionLink } from './action-link';
 import { BallMark } from './icons';
 
 const links = [
-    { href: '#lapangan', label: 'Lapangan' },
-    { href: '#fasilitas', label: 'Fasilitas' },
-    { href: '#cafe', label: 'Cafe' },
-    { href: '#lokasi', label: 'Lokasi' },
+    { href: '/#lapangan', label: 'Lapangan' },
+    { href: '/#fasilitas', label: 'Fasilitas' },
+    { href: '/#cafe', label: 'Cafe' },
+    { href: '/#member', label: 'Member' },
+    { href: '/#lokasi', label: 'Lokasi' },
 ];
 
 export function SiteNav() {
@@ -17,7 +18,7 @@ export function SiteNav() {
                 className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-6 px-4 sm:px-6 lg:px-10"
             >
                 <a
-                    href="#top"
+                    href="/#top"
                     className="flex items-center gap-2.5 font-display text-[1.45rem] leading-none font-extrabold tracking-[0.01em] uppercase"
                 >
                     <BallMark className="size-6 shrink-0" />

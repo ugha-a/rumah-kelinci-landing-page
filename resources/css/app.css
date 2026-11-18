@@ -19,6 +19,8 @@
     --color-ball-deep: #c6d424;
     --color-ink: #0b1b33;
     --color-scoreboard: #060d1a;
+    /* Fault: form errors and lapsed cards only (padel term for an invalid serve). */
+    --color-fault: #ff9a8b;
 
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }

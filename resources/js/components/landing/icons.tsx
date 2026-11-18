@@ -66,6 +66,14 @@ export function ClockIcon(props: IconProps) {
     );
 }
 
+export function ChevronDownIcon(props: IconProps) {
+    return (
+        <IconBase {...props}>
+            <path d="m6 9 6 6 6-6" />
+        </IconBase>
+    );
+}
+
 /** Padel ball: a circle with its seam, used as the wordmark's mark. */
 export function BallMark(props: IconProps) {
     return (

@@ -1,9 +1,23 @@
 {
     "name": "rumah-kelinci-landing-page",
+    "main": "worker/index.ts",
     "compatibility_date": "2026-11-01",
     "workers_dev": true,
     "assets": {
         "directory": "./dist",
-        "not_found_handling": "404-page",
+        "binding": "ASSETS",
+        "not_found_handling": "single-page-application",
+        // Worker handles the API, the admin login, and noindex for member pages.
+        "run_worker_first": ["/api/*", "/admin", "/admin/*", "/m/*"],
+    },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "rumah-kelinci-members",
+            "migrations_dir": "migrations",
+        },
+    ],
+    "observability": {
+        "enabled": true,
     },
 }
