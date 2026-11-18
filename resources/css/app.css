@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+
+@source '../views';
+
+@theme {
+    --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+    --font-display:
+        var(--font-big-shoulders-display), 'Arial Narrow', ui-sans-serif,
+        sans-serif;
+
+    /* Court world */
+    --color-court: #1c4fa8;
+    --color-court-deep: #173f88;
+    --color-surround: #0b1b33;
+    --color-surround-raised: #11264a;
+    --color-line: #f7f9fc;
+    --color-line-soft: #c9d6ee;
+    --color-ball: #ddeb3b;
+    --color-ball-deep: #c6d424;
+    --color-ink: #0b1b33;
+    --color-scoreboard: #060d1a;
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+        background-color: var(--color-surround);
+        color-scheme: dark;
+        scrollbar-color: var(--color-court) var(--color-surround);
+    }
+
+    body {
+        background-color: var(--color-surround);
+        color: var(--color-line);
+        caret-color: var(--color-ball);
+    }
+
+    ::selection {
+        background-color: var(--color-ball);
+        color: var(--color-ink);
+    }
+
+    :focus-visible {
+        outline: 3px solid var(--color-ball);
+        outline-offset: 3px;
+        border-radius: 2px;
+    }
+
+    a {
+        text-underline-offset: 0.22em;
+        text-decoration-thickness: 1px;
+    }
+
+    input[type='date']::-webkit-calendar-picker-indicator,
+    input[type='time']::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        opacity: 0.8;
+        cursor: pointer;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+    }
+}
+
+@layer components {
+    /* Waits for the in-view trigger, but draws itself anyway after 6s so lines are never lost. */
+    .court-line-pending {
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+        animation: court-line-draw 1.1s var(--ease-out-expo) 6s forwards;
+    }
+
+    .court-line-draw {
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+        animation: court-line-draw 1.1s var(--ease-out-expo) forwards;
+    }
+
+    @keyframes court-line-draw {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    .rise-in {
+        animation: rise-in 0.9s var(--ease-out-expo) both;
+    }
+
+    @keyframes rise-in {
+        from {
+            opacity: 0;
+            transform: translateY(14px);
+            filter: blur(6px);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .court-line-draw,
+        .court-line-pending {
+            animation: none;
+            stroke-dashoffset: 0;
+        }
+
+        .rise-in {
+            animation: none;
+        }
+    }
+}
